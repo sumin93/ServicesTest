@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+
+    <Button
+        android:id="@+id/simple_service"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/service"
+        />
+
+    <Button
+        android:id="@+id/foreground_service"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/foreground_service"
+        />
+
+    <Button
+        android:id="@+id/intent_service"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/intent_service"
+        />
+
+    <Button
+        android:id="@+id/job_dispatcher"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_dispatcher"
+        />
+
+    <Button
+        android:id="@+id/job_intent_service"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_intent_service"
+        />
+
+    <Button
+        android:id="@+id/alarm_manager"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/alarm_manager"
+        />
+
+    <Button
+        android:id="@+id/work_manager"
+        style="@style/ServiceButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/work_manager"
+        />
+</LinearLayout>
