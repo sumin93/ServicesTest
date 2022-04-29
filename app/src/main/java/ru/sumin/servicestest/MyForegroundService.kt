@@ -9,28 +9,36 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MyForegroundService : Service() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
+    private val notificationManager by lazy {
+        getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    }
+
+    private val notificationBuilder by lazy {
+        createNotificationBuilder()
+    }
+
     override fun onCreate() {
         super.onCreate()
         log("onCreate")
         createNotificationChannel()
-        startForeground(NOTIFICATION_ID, createNotification())
+        startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("onStartCommand")
         coroutineScope.launch {
-            for (i in 0 until 100) {
+            for (i in 0..100 step 5) {
                 delay(1000)
+                val notification = notificationBuilder
+                    .setProgress(100, i, false)
+                    .build()
+                notificationManager.notify(NOTIFICATION_ID, notification)
                 log("Timer $i")
             }
             stopSelf()
@@ -53,7 +61,6 @@ class MyForegroundService : Service() {
     }
 
     private fun createNotificationChannel() {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
                 CHANNEL_ID,
@@ -64,11 +71,12 @@ class MyForegroundService : Service() {
         }
     }
 
-    private fun createNotification() = NotificationCompat.Builder(this, CHANNEL_ID)
+    private fun createNotificationBuilder() = NotificationCompat.Builder(this, CHANNEL_ID)
         .setContentTitle("Title")
         .setContentText("Text")
         .setSmallIcon(R.drawable.ic_launcher_background)
-        .build()
+        .setProgress(100, 0, false)
+        .setOnlyAlertOnce(true)
 
     companion object {
 
