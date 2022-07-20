@@ -2,6 +2,7 @@ package ru.sumin.servicestest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.sumin.servicestest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.simpleService.setOnClickListener {
+            stopService(MyForegroundService.newIntent(this))
             startService(MyService.newIntent(this))
+        }
+        binding.foregroundService.setOnClickListener {
+            ContextCompat.startForegroundService(this, MyForegroundService.newIntent(this))
         }
     }
 }
