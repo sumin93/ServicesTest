@@ -19,10 +19,11 @@ class MyService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         scope.launch {
             log("onStartCommand")
-            for (i in 0..100) {
+            for (i in 0..10) {
                 delay(1000)
                 log("Timer: $i")
             }
+            stopSelf()
         }
         return super.onStartCommand(intent, flags, startId)
 
