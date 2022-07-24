@@ -3,6 +3,7 @@
     package="ru.sumin.servicestest">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,9 @@
         </activity>
         <service android:name=".MyService"/>
         <service android:name=".MyForegroundService"/>
+        <service android:name=".MyIntentService"/>
+        <service android:name=".MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>
