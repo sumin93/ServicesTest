@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -25,7 +27,11 @@
         <service android:name=".MyForegroundService"/>
         <service android:name=".MyIntentService"/>
         <service android:name=".MyIntentService2"/>
-        <service android:name=".MyJobService"
+        <service
+            android:name=".MyJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service
+            android:name=".MyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
